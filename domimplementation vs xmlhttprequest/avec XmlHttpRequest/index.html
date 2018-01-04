@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>XMLHttpRequest</title>
+<script type="text/javascript" src="js.js"></script>
+<script type="text/javascript">
+
+function request(callback) {
+	 var xhr = getXMLHttpRequest();
+	 xhr.onreadystatechange = function() {
+		 if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+			callback(xhr.responseXML);
+		}
+	 };
+	 xhr.open("GET", "data.xml", true);
+	 xhr.send(null);
+}
+
+function readData(oData) {
+	if(oData!=null) {
+	     var option, tit;
+		 var nodes = oData.getElementsByTagName("livre");
+		 for (var i=0, c=nodes.length; i<c; i++) {
+				 var option = document.createElement("option");
+			try { tit = document.createTextNode(nodes[i].childNodes[1].innerHTML);}
+			catch(e) {tit = document.createTextNode("Titre " + i);}
+				 option.appendChild(tit);
+				 option.value = i;
+				 document.getElementById("output").appendChild(option);
+		}
+			
+	}
+}
+
+window.onload = function () {
+	request(readData);
+}
+
+function afficherDetails(oData) {
+if(oData!=null) {
+	var listeTitres = document.getElementById("output");
+	var optSelected = parseInt(listeTitres.options[listeTitres.selectedIndex].value);
+	try {
+	auteur = oData.getElementsByTagName("auteur")[optSelected];
+	document.getElementById("auteur").innerHTML = auteur.firstChild.data;
+	}
+	catch(e) {document.getElementById("auteur").innerHTML = "L'auteur n'est pas fourni";}
+	try {
+	nbPages  = oData.getElementsByTagName("nombrepages")[optSelected];  
+	document.getElementById("nbPages").innerHTML = nbPages.firstChild.data;	
+	}
+	catch(e) {document.getElementById("nbPages").innerHTML = "Le nombre de pages n'est pas fourni";}	
+	}
+}
+
+</script></head>
+<body>
+
+<fieldset>
+	<legend>Sélection du livre</legend>
+	<form id="getLivre" method="get" action="">
+		<div>
+			<label for="output">Choisir un livre : </label>
+			<select id="output">
+				<option value="-1">Choisissez un livre</option>
+			</select>
+			
+		</div>
+		<p><input type="button" value="Afficher les détails" id="btnDetails" onclick="request(afficherDetails)" /></p>
+	</form>
+</fieldset>
+
+<fieldset>
+	<legend>Détails du livre</legend>
+	<p><label>Auteur: </label> <span id="auteur"></span></p>
+	<p><label>Nombre de pages: </label> <span id="nbPages"></span></p>
+</fieldset>
+
+
+
+</body>
+</html>

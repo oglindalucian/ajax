@@ -1,0 +1,20 @@
+<html>
+<head>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<div id="r"></div>
+
+<script>
+$(document).ready(function(){
+        $.getJSON('TP9.json', function(donnees) {
+		    $(donnees.sites.site).each(function(i, ele) {
+            $('#r').append('<a href=' + ele.url + '>' + ele.title + '</a>');
+            $('#r').append('<p>' + ele.desc.brief + '</p>');
+            $('#r').append('<p>' + ele.desc.long + '</p>');
+      });
+    });  
+});
+</script>
+</body>
+</html>

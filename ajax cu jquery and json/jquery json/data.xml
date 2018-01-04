@@ -1,0 +1,24 @@
+{
+	"sites": {
+		"site": [
+			{
+				"title": "Microsoft",
+				"url": "http://www.microsoft.ca",
+				"desc": {
+					"brief": "Résumé",
+					"long": "Description longue"
+				},
+				"_id": "2"
+			},
+			{
+				"title": "Intel",
+				"url": "http://www.intel.com",
+				"desc": {
+					"brief": "Résumé",
+					"long": "Description longue"
+				},
+				"_id": "3"
+			}
+		]
+	}
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Sélecteurs CSS</title>
+  </head>
+  <body>
+    <form>
+	<table>
+     <tr><td> Nom d'utilisateur</td>
+	 <td>
+      <input type="text" name="nom"></td></tr>
+     <tr><td>
+	  Mot de passe</td>
+      <td><input type="password" name="pass"></td></tr>
+    
+      <tr><td>Sexe</td></tr>
+      <tr><td>Homme</td> <td><input type="radio" name="sexe" value="H"></td></tr>
+	  <tr><td>Femme </td><td><input type="radio" name="sexe" value="F"></td></tr>
+
+     <tr><td>
+	 Commentaires</td>
+     <td> <textarea rows="3" name="commentaires">Tapez vos commentaires ici</textarea></td></tr>
+      <tr><td>
+	  <input type="image" src="download.png"></td></tr>
+
+     <tr><td> <input type="submit" value="Envoyer"></td>
+     <td> <input type="reset" value="Annuler"></td></tr>
+	  </table>
+    </form> 
+
+    <script src="jquery.js"></script>
+    <script>
+      $(function() {
+       $(':input').css('background','yellow');
+      }); 
+    </script>
+  </body>
+</html>

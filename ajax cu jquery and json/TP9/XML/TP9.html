@@ -1,0 +1,37 @@
+<html>
+<head>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<div id="r"></div>
+
+<script>
+$(document).ready(function(){
+        ///// Par méthode .get
+        $.get('TP9.xml', function(xml) {
+             $(xml).find('site').each(function () {
+             $('#r').append('<a href=' + $(this).find('url').text() + '>' +  $(this).find('title').text() + '</a>' + '<br />');
+			 $('#r').append('<p>' + $(this).find('brief').text() + '</p>');
+			 $('#r').append('<p>' + $(this).find('long').text() + '</p>');
+		  });
+	});
+        
+        //// Par méthode .ajax		
+/*	  
+	 $.ajax({
+    type: "GET",
+    url: "TP9.xml",
+    dataType: "xml",
+    success: function (xml) {
+        $(xml).find('site').each(function () {
+             $('#r').append('<a href=' + $(this).find('url').text() + '>' +  $(this).find('title').text() + '</a>' + '<br />');
+			 $('#r').append('<p>' + $(this).find('brief').text() + '</p>');
+			 $('#r').append('<p>' + $(this).find('long').text() + '</p>');
+        });
+    }
+});
+*/
+})	 
+</script>
+</body>
+</html>

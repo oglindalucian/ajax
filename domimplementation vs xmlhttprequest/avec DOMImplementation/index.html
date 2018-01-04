@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>XMLHttpRequest</title>
+<script type="text/javascript" src="js.js"></script>
+<script type="text/javascript">
+
+var DOMXML = null;
+	window.onload = function() {
+		getDOMImplementation('data.xml', readData);
+	}
+
+function readData(oData) {
+DOMXML = oData;
+var titres = oData.getElementsByTagName("titre");
+var sorted = [];
+
+for (var i=0, c=titres.length; i<c; i++) 
+	{
+		
+			sorted.push([titres[i].firstChild.data , i]); 
+		
+	}
+	sorted.sort();
+	
+	var list = "<select name=\"titres\" id=\"titres\">\n";
+	for (var i=0, c=sorted.length; i<c; i++) {
+		list += "<option value=\"" + sorted[i][1] + "\">" + sorted[i][0] + "</option>\n";
+	}
+	
+	list += "</select>\n";
+	
+	document.getElementById("output").innerHTML = list;
+
+}
+
+function detailsLivre() {
+    var auteur;
+	var nbPages;
+    with (document.getElementById("titres")) var idSerie = parseInt(options[selectedIndex].value);      
+    try {
+	auteur = DOMXML.getElementsByTagName("auteur")[idSerie];
+	document.getElementById("auteur").innerHTML = auteur.firstChild.data;
+	}
+	catch(e) {document.getElementById("auteur").innerHTML = "L'auteur n'est pas fourni";}
+	try {
+	nbPages  = DOMXML.getElementsByTagName("nombrepages")[idSerie];  
+	document.getElementById("nbPages").innerHTML = nbPages.firstChild.data;	
+	}
+	catch(e) {document.getElementById("nbPages").innerHTML = "Le nombre de pages n'est pas fourni";}
+}
+
+</script></head>
+<body>
+
+<fieldset>
+	<legend>Sélection du livre</legend>
+	<form id="getLivre" method="get" action="">		
+			<label for="output">Choisir un livre : </label>
+			<div id="output"></div>		
+		<p><input type="button" value="Afficher les détails" id="btnDetails" onclick="detailsLivre()" /></p>
+	</form>
+</fieldset>
+
+<fieldset>
+	<legend>Détails du livre</legend>
+	<p><label>Auteur: </label> <span id="auteur"></span></p>
+	<p><label>Nombre de pages: </label> <span id="nbPages"></span></p>
+</fieldset>
+
+</body>
+</html>

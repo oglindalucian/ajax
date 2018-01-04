@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<title>Techniques AJAX - DOMImplementation - XML Din</title>
+ 
+<script type="text/javascript" src="oDOMImplementation.js"></script>
+<script type="text/javascript">
+var DOMXML = null;
+	window.onload = function() {
+		getDOMImplementation('data.xml', getData);
+	}
+	
+function getData(oData) {
+	DOMXML = oData;
+	
+	var series = oData.getElementsByTagName("serie");
+	var sorted = [];
+	
+	// Classement par ordre alphabétique, via tableau à 2 dimensions
+	for (var i=0, c=series.length; i<c; i++) 
+	{
+		
+			sorted.push([series[i].getAttribute("name") , i]); 
+		
+	}
+	sorted.sort();	
+	
+	// Génération du SELECT
+	var list = "<select name=\"serieName\" id=\"serieName\">\n";
+	for (var i=0, c=sorted.length; i<c; i++) {
+		list += "<option value=\"" + sorted[i][1] + "\">" + sorted[i][0] + "</option>\n";
+	}
+	
+	list += "</select>\n";
+	
+	document.getElementById("outputListDiv").innerHTML = list;
+}
+
+function displayBD() {
+    // récupération de l'id de la série, écrit dans la VALUE de l'OPTION
+    with (document.getElementById("serieName")) var idSerie = parseInt(options[selectedIndex].value);   
+    var serie = DOMXML.getElementsByTagName("serie")[idSerie];
+    var bds   = serie.getElementsByTagName("bd");  
+    // Création de la TABLE avec les résultats
+    var table = "<table class=\"sortable\" width=\"100%\">\n";
+    table += "<tr><th width=\"20\">N°</th><th>Titre de l'album</th></td>\n";
+    for (var i=0, c=bds.length; i<c; i++) {
+        table += "<tr><td>" + bds[i].getAttribute("num") + "</td><td>" + bds[i].getAttribute("title") + "</td></tr>\n";
+    }
+    table += "</table>\n";        document.getElementById("outputBDDiv").innerHTML = table;
+}
+
+</script>
+ </head>
+
+ <body>
+
+<fieldset>
+	<legend>Sélection de la série</legend>
+	<form id="bdForm" method="get" action="">
+		<div>
+			<label for="serieName">Choisir une série : </label>
+
+			<!-- On écrira le SELECT dans le SPAN ci-dessous -->
+			<span id="outputListDiv"><em>Liste des séries non chargée...</em></span>
+		</div>
+		<p><input type="button" value="Afficher les BD de cette série" onclick="displayBD();" /></p>
+	</form>
+</fieldset>
+
+<fieldset id="outputBDFieldset">
+	<legend>BD en ma possession</legend>
+
+	<!-- On écrira la TABLE avec la liste des albums dans le DIV ci-dessous -->
+	<div id="outputBDDiv"></div>
+</fieldset>
+
+</body></html>

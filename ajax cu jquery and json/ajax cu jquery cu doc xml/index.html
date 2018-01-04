@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>XML</title>
+<script src="jquery.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){	
+    $(window).load(function() {
+        $.get("data.xml", function(recu, status){
+            var titles  = recu.getElementsByTagName('title');
+			var urls = recu.getElementsByTagName('url');
+			var resumes = recu.getElementsByTagName('brief');
+			var description = recu.getElementsByTagName('long');
+			
+			var liste = '<ul style=\"list-style-type:none\">';
+			for(var i=0, c=titles.length; i<c; i++) {
+				liste+='<li><a href=\"'+urls[i].firstChild.data+'\" alt=\"\" target=\"_blank\">'+titles[i].firstChild.data+'</a></li>';
+				liste+='<li>'+resumes[i].firstChild.data+'</li><li>'+description[i].firstChild.data+'</li>';
+			}
+			liste+='</ul>';
+			
+			//$('#output')[0].html = liste;
+			document.getElementById("output").innerHTML = liste;
+        });
+    });
+});
+
+</script></head>
+<body>
+	<div id="output">
+</body>
+</html>

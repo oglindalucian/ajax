@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>JSON</title>
+<script src="jquery.js"></script>
+<script type="text/javascript">
+
+	
+$(function() {
+    $(window).load(function() {
+        $.getJSON('data.json', function(donnees) {
+        $('#output').html('<ul style=\"list-style-type:none\">');
+		var titles  = donnees.sites.site;
+			for(var i = 0, x = titles.length; i<x; i++) {
+				$('#output').append('<li><a href=\"' + donnees.sites.site[i].url + '\" alt=\"\" target=\"_blank\">'+ donnees.sites.site[i].title + '</a></li>');
+				$('#output').append('<li>' + donnees.sites.site[i].desc.brief + '</li>');
+				$('#output').append('<li>' + donnees.sites.site[i].desc.long + '</li>');
+			}
+        $('#output').append('</ul>');
+      });
+    });  
+});
+
+
+
+
+
+</script></head>
+<body>
+	<div id="output">
+</body>
+</html>

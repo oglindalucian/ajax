@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bds>
+	<!-- PIERRE TOMBAL -->
+	<serie name="Pierre Tombal">
+		<bd num="4" title="des os pilants" />
+		<bd num="5" title="ô suaires" />
+		<bd num="12" title="la pelle aux morts" />	
+		<bd num="21" title="k.os" />
+		<bd num="22" title="ne jouez pas avec la Mort !" />
+		<bd num="24" title="on s'éclate mortels !" />
+	</serie>
+	<!-- LES PROFS -->
+	<serie name="Les Profs">
+		<bd num="2" title="loto et colles" />
+		<bd num="3" title="tohu-bahut" />
+		<bd num="4" title="rentrée des artistes" />
+		<bd num="5" title="chute des cours" />
+		<bd num="9" title="rythme scolaire" />		
+	</serie>
+	<!-- et ça continue, encore et encore, c'est que le début, d'accord d'accord... -->
+</bds>

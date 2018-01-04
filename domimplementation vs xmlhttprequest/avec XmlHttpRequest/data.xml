@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<livres>
+<livre>
+	<titre>Guerre et Paix</titre>
+	<auteur>Leon Tolstoi</auteur>
+	<nombrepages>1572</nombrepages>
+</livre>
+<livre>
+	<titre>La Dame aux camelias</titre>
+	<auteur>Alexandre Dumas</auteur>
+	<publication>
+		<editeur>Lebegue</editeur>
+		<dateparution>1848</dateparution>
+	</publication>
+</livre>
+</livres>
